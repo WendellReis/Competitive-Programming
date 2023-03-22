@@ -11,6 +11,5 @@ int main(){
         else n/=2;
     }
     cout << n << endl;
-    5;
     return 0;
 }
