@@ -11,7 +11,7 @@ int main(){
         v.push_back(i);
 
     int k = -1;
-    for(int i = 0; i < n; i++){
+    while(!v.empty()){
         k = (k+2)%v.size();
         cout << v[k];
         v.erase(v.begin()+k);
