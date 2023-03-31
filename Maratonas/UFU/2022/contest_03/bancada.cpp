@@ -2,6 +2,7 @@
 
 using namespace std;
 
+bool primo(int n);
 int mmc(int *v, int t);
 
 int main(){
@@ -11,6 +12,15 @@ int main(){
     return 0;
 }
 
+bool primo(int n){
+    if(n < 2) return false;
+    int q = 1;
+    for(int i = 2; i <= n/2; i++){
+        if(n%i == 0) q++;
+        if(q > 1) return false;
+    }
+    return true;    
+}
 int mmc(int *v, int t){
     int mmc = 1, d = 2;
     while(true){
@@ -24,7 +34,7 @@ int mmc(int *v, int t){
                 v[i]/=d;
                 u = false;
             }
-        if(u) d++;
+        if(u) while(!primo(d)) d++;
         else mmc*=d;
     }
     return mmc;
