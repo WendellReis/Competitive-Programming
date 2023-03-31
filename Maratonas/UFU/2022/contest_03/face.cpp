@@ -2,9 +2,17 @@
 
 using namespace std;
 
+string toBinary(int n, int tam);
+
 int main(){
-    int n;
-    cin >> n;
-    int tot = pow(2,n), e = 0;
+    string string1("Starting strings");
+    string string2("end of the string");
+
+    string1.append("").append(string2);
+    cout << string1 << endl;
     return 0;
+}
+
+string toBinary(int n, int tam){
+    for(int )
 }
