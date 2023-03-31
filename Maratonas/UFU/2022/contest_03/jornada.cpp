@@ -11,7 +11,6 @@ int main(){
     return 0;
 }
 
-
 int mmc(int *v, int tam){
     int d = 2, mmc = 1;
     bool fim, div;
