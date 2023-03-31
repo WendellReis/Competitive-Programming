@@ -2,9 +2,18 @@
 
 using namespace std;
 
+string binary(int n, int tam);
+
 int main(){
-    int n;
-    cin >> n;
-    int tot = pow(2,n), e = 0;
+    string s = binary(32,10);
     return 0;
+}
+
+string binary(int n, int tam){
+    string s = "";
+    for(int i = 0; i < tam; i++)
+        s = s.append("0");
+    int m = log(n)/log(2);
+    cout << m;
+    return s;
 }
