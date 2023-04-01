@@ -2,25 +2,6 @@
 
 using namespace std;
 
-bool primo(int n);
-int mmc(int *v, int t);
-
-int main(){
-    int v[4];
-    while(cin >> v[0] >> v[1] >> v[2] >> v[3])
-        cout << mmc(v,4) << endl;
-    return 0;
-}
-
-bool primo(int n){
-    if(n < 2) return false;
-    int q = 1;
-    for(int i = 2; i <= n/2; i++){
-        if(n%i == 0) q++;
-        if(q > 1) return false;
-    }
-    return true;    
-}
 int mmc(int *v, int t){
     int mmc = 1, d = 2;
     while(true){
@@ -35,7 +16,25 @@ int mmc(int *v, int t){
                 u = false;
             }
         if(u) d++;
-        else mmc*=d;
+        else mmc=d;
     }
     return mmc;
+}
+
+int main()
+{
+    int N;
+
+    while(cin >> N)
+    {
+        int v[N];
+        for(int c=1;c<=N;c++)
+        {
+            cout << c;
+            v[c-1]=c;
+        }
+        cout << mmc(v,N) << '\n';
+    }
+
+    return 0;
 }
