@@ -2,39 +2,17 @@
 
 using namespace std;
 
-int mmc(int *v, int t){
-    int mmc = 1, d = 2;
-    while(true){
-        bool s = true, u = true;
-        for(int i = 0; i < t; i++)
-            if(v[i] > 1){s=false;break;}
-        if(s) break;
+int main() {
 
-        for(int i = 0; i < t; i++)
-            if(v[i]%d == 0){
-                v[i]/=d;
-                u = false;
-            }
-        if(u) d++;
-        else mmc=d;
-    }
-    return mmc;
-}
+    int a, b, c;
 
-int main()
-{
-    int N;
-
-    while(cin >> N)
+    cin >> a >> b >> c;
+    int sum = 0;
+    for (int i = 0; i < c; i++)
     {
-        int v[N];
-        for(int c=1;c<=N;c++)
-        {
-            cout << c;
-            v[c-1]=c;
-        }
-        cout << mmc(v,N) << '\n';
+        sum+= (a + b*i);
     }
+    cout << sum << endl;
 
     return 0;
 }
