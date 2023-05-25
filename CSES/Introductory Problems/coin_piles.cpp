@@ -4,15 +4,16 @@
 using namespace std;
 
 int main(){
-    ll n, a, b;
-    bool s = false;
+    int n;
     cin >> n;
 
+    ll a,b;
     while(n > 0){
         cin >> a >> b;
-
-        if(s) cout << "YES" << endl;
-        else cout << "NO" << endl;
+        if((a + b)%3 != 0 || a > 2*b || b > 2*a)
+            cout << "NO\n"; 
+        else
+            cout << "YES\n";      
         n--;
     }
     return 0;
