@@ -42,7 +42,7 @@ void search(int k, int n, vector<ll> macas){
 
 ll somaVet(vector<ll> vet){
     ll s = 0;
-    for(int i = 0; i < vet.size(); i++)
+    for(ll i = 0; i < vet.size(); i++)
         s+= vet[i];
     return s;
 }
