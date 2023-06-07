@@ -1,51 +1,39 @@
-#include <iostream>
-#include <stack>
+#include <bits/stdc++.h>
 
 using namespace std;
-
-bool comparaChar(char a, char b){
-    if((a == '{' && b == '}') ||
-        (a == '(' && b == ')') ||
-        (a == '[' && b == ']') )
-        return true;
-    return false;
-}
-
-#define si stack<int>
+#define REP(i,b) for(int i = 0; i < b; i++)
 
 int main(){
-    si aberturas;
-    int n;
-    string exp;
-    cin >> n;
-    bool m = true;
+    int n; cin >> n;
+    REP(i,n){
+        string line; cin >> line;
 
-    for(int i = 0; i < n; i++){
-        m = true;
-        cin >> exp;
-        for(int j = 0; j < exp.size(); j++){
-            if(exp[j] == '{' || exp[j] == '(' || exp[j] == '[')
-                aberturas.push(exp[j]);
-            else if(aberturas.size() == 0){
-                cout << "N3" << endl;
-                m = !m;
+        stack<char> chaves;
+        bool valid = true;
+        REP(j,line.size()){
+            if(line[j] == '{' || line[j] == '(' || line[j] == '[')
+                chaves.push(line[j]);
+            else if(chaves.size() == 0){
+                cout << "N\n";
+                valid = false;
                 break;
-            } else if(comparaChar(aberturas.top(), exp[j]))
-                aberturas.pop();
-            else{
-                cout << "N2" << endl;
-                m = !m; 
-                break;  
+            } else if(line[j] == '}' && chaves.top() != '{'){
+                cout << "N\n";
+                valid = false;
+                break;
+            } else if(line[j] == ')' && chaves.top() != '('){
+                cout << "N\n";
+                valid = false;
+                break;
+            } else if(line[j] == ']' && chaves.top() != '['){
+                cout << "N\n";
+                valid = false;
+                break;
             }
+            chaves.pop();
         }
-
-        if(aberturas.size() > 0 && m){
-            cout << "N1" << endl;
-            m = !m;
-        }
-        if(m)
-          cout << "S" << endl;  
-        aberturas.empty(); 
+        if(chaves.size() == 0 && valid)
+            cout << "S\n";
     }
     return 0;
 }
