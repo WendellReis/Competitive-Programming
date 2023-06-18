@@ -13,9 +13,9 @@ bool iniciaCom(string palavraA, string palavraB);
 int comprimento(string palavra);
 string concatenar(string palavraA, string palavraB);
 string subPalavra(string palavra, int inicio, int fim);
-No* remove(No *no, string palavra, No *anterior, No *ultimo_pai);
-bool busca(No *no, string chave);
-No* insere(No *no, string palavra);
+No* remover(No *no, string palavra, No *anterior, No *ultimo_pai);
+bool buscar(No *no, string chave);
+No* inserir(No *no, string palavra);
 void exibir(No *no);
 void exibirNo(No *no);
 
@@ -24,94 +24,94 @@ int main(){
     No *raiz = (No*)calloc(1, sizeof(No));
     raiz->baixo = nullptr;
     raiz->direita = nullptr;
-    raiz = insere(raiz, "banana");
-    raiz = insere(raiz, "banca");
-    raiz = insere(raiz, "macarrao");
-    raiz = insere(raiz, "porto");
-    raiz = insere(raiz, "cachorro");
-    raiz = insere(raiz, "ban");
-    raiz = insere(raiz, "cadeado");
-    raiz = insere(raiz, "castrado");
-    raiz = insere(raiz, "coleira");
-    raiz = insere(raiz, "bananada");
-    raiz = insere(raiz, "bananacao");
+    raiz = inserir(raiz, "banana");
+    raiz = inserir(raiz, "banca");
+    raiz = inserir(raiz, "macarrao");
+    raiz = inserir(raiz, "porto");
+    raiz = inserir(raiz, "cachorro");
+    raiz = inserir(raiz, "ban");
+    raiz = inserir(raiz, "cadeado");
+    raiz = inserir(raiz, "castrado");
+    raiz = inserir(raiz, "coleira");
+    raiz = inserir(raiz, "bananada");
+    raiz = inserir(raiz, "bananacao");
 
     exibir(raiz);
 
     cout << "\n\nBusca de chaves:\n";
-    cout << "banana: " << (busca(raiz, "banana") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "banca: " << (busca(raiz, "banca") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "maca: " << (busca(raiz, "maca") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "marte: " << (busca(raiz, "marte") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "martelo: " << (busca(raiz, "martelo") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "cachorro: " << (busca(raiz, "cachorro") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "laranja: " << (busca(raiz, "laranja") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "bananacao: " << (busca(raiz, "bananacao") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "cereja: " << (busca(raiz, "cereja") ? "Encontrada" : "Nao encontrada") << "\n";    
+    cout << "banana: " << (buscar(raiz, "banana") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "banca: " << (buscar(raiz, "banca") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "maca: " << (buscar(raiz, "maca") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "marte: " << (buscar(raiz, "marte") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "martelo: " << (buscar(raiz, "martelo") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "cachorro: " << (buscar(raiz, "cachorro") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "laranja: " << (buscar(raiz, "laranja") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "bananacao: " << (buscar(raiz, "bananacao") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "cereja: " << (buscar(raiz, "cereja") ? "Encontrada" : "Nao encontrada") << "\n";    
     cout << "\n";
     
     exibir(raiz);
     cout << "--------------REMOVENDO: ban-------------------\n";
-    raiz = remove(raiz, "ban", nullptr, nullptr);
+    raiz = remover(raiz, "ban", nullptr, nullptr);
     exibir(raiz);
     cout << "--------------REMOVENDO: banana-------------------\n";
-    raiz = remove(raiz, "banana", nullptr, nullptr);
+    raiz = remover(raiz, "banana", nullptr, nullptr);
     exibir(raiz);
     cout << "--------------REMOVENDO: bananada-------------------\n";
-    raiz = remove(raiz, "bananada", nullptr, nullptr);
+    raiz = remover(raiz, "bananada", nullptr, nullptr);
     exibir(raiz);
     cout << "--------------REMOVENDO: banca-------------------\n";
-    raiz = remove(raiz, "banca", nullptr, nullptr);
+    raiz = remover(raiz, "banca", nullptr, nullptr);
     exibir(raiz);
     cout << "--------------INSERINDO: banca-------------------\n";
-    raiz = insere(raiz, "banca");
+    raiz = inserir(raiz, "banca");
     exibir(raiz);
     cout << "--------------REMOVENDO: bananacao-------------------\n";
-    raiz = remove(raiz, "bananacao", nullptr, nullptr);
+    raiz = remover(raiz, "bananacao", nullptr, nullptr);
     exibir(raiz);
 
     cout << "--------------REMOVENDO macarrao-------------------\n";
-    raiz = remove(raiz, "macarrao", nullptr, nullptr);
+    raiz = remover(raiz, "macarrao", nullptr, nullptr);
     exibir(raiz);
     
     cout << "--------------REMOVENDO porto-------------------\n";
-    raiz = remove(raiz, "porto", nullptr, nullptr);
+    raiz = remover(raiz, "porto", nullptr, nullptr);
     exibir(raiz);
 
     cout << "--------------REMOVENDO cachorro-------------------\n";
-    raiz = remove(raiz, "cachorro", nullptr, nullptr);
+    raiz = remover(raiz, "cachorro", nullptr, nullptr);
     exibir(raiz);
 
     cout << "--------------REMOVENDO ban-------------------\n";
-    raiz = remove(raiz, "ban", nullptr, nullptr);
+    raiz = remover(raiz, "ban", nullptr, nullptr);
     exibir(raiz);
 
     cout << "--------------REMOVENDO cadeado-------------------\n";
-    raiz = remove(raiz, "cadeado", nullptr, nullptr);
+    raiz = remover(raiz, "cadeado", nullptr, nullptr);
     exibir(raiz);
 
     cout << "--------------REMOVENDO castrado-------------------\n";
-    raiz = remove(raiz, "castrado", nullptr, nullptr);
+    raiz = remover(raiz, "castrado", nullptr, nullptr);
     exibir(raiz);
 
     cout << "--------------REMOVENDO coleira-------------------\n";
-    raiz = remove(raiz, "coleira", nullptr, nullptr);
+    raiz = remover(raiz, "coleira", nullptr, nullptr);
     exibir(raiz);
 
     cout << "--------------REMOVENDO banca-------------------\n";
-    raiz = remove(raiz, "banca", nullptr, nullptr);
+    raiz = remover(raiz, "banca", nullptr, nullptr);
     exibir(raiz);
 
     cout << "\n\nBusca de chaves:\n";
-    cout << "banana: " << (busca(raiz, "banana") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "banca: " << (busca(raiz, "banca") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "maca: " << (busca(raiz, "maca") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "marte: " << (busca(raiz, "marte") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "martelo: " << (busca(raiz, "martelo") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "cachorro: " << (busca(raiz, "cachorro") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "laranja: " << (busca(raiz, "laranja") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "bananacao: " << (busca(raiz, "bananacao") ? "Encontrada" : "Nao encontrada") << "\n";
-    cout << "cereja: " << (busca(raiz, "cereja") ? "Encontrada" : "Nao encontrada") << "\n";    
+    cout << "banana: " << (buscar(raiz, "banana") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "banca: " << (buscar(raiz, "banca") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "maca: " << (buscar(raiz, "maca") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "marte: " << (buscar(raiz, "marte") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "martelo: " << (buscar(raiz, "martelo") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "cachorro: " << (buscar(raiz, "cachorro") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "laranja: " << (buscar(raiz, "laranja") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "bananacao: " << (buscar(raiz, "bananacao") ? "Encontrada" : "Nao encontrada") << "\n";
+    cout << "cereja: " << (buscar(raiz, "cereja") ? "Encontrada" : "Nao encontrada") << "\n";    
     cout << "\n";
     
     return 0;
@@ -141,7 +141,7 @@ int comprimento(string palavra){
     return palavra.length();
 }
 
-bool busca(No *no, string chave) {
+bool buscar(No *no, string chave) {
     if(no == nullptr)
         return false;
     int compBusca, compBuscaNo;
@@ -150,7 +150,7 @@ bool busca(No *no, string chave) {
     if(compBusca < compBuscaNo) {
         if(chave[0] > no->palavra[0]) {
             if(no->direita != nullptr) {
-                return busca(no->direita, chave);
+                return buscar(no->direita, chave);
             }
         }
         return false;
@@ -160,7 +160,7 @@ bool busca(No *no, string chave) {
 
     if(subChave[0] > no->palavra[0]) {
         if(no->direita != nullptr) {
-            return busca(no->direita, chave);
+            return buscar(no->direita, chave);
         } else {
             return false;
         }
@@ -171,7 +171,7 @@ bool busca(No *no, string chave) {
             return no->palavraFinal;
         } else if(no->baixo != nullptr) {
             string subp = subPalavra(chave, compBuscaNo, compBusca-1);
-            return busca(no->baixo, subp);
+            return buscar(no->baixo, subp);
         }
     }    
     return false;
@@ -184,7 +184,7 @@ string subPalavra(string palavra, int inicio, int fim){
     return subString;
 }
 
-No* insere(No *no, string palavra){
+No* inserir(No *no, string palavra){
     int i = 0;
     int compPalavra = palavra.size();
     int compPalavraNo = no->palavra.size();
@@ -202,7 +202,7 @@ No* insere(No *no, string palavra){
         if(i == 0) { // Não há letras em comum
             if(palavra[0] > no->palavra[0]) { // A palavra deve ser inserida à direita
                 if(no->direita != nullptr) { // Há alguem à direita, tentar inserir à direita dele
-                    no->direita = insere(no->direita, palavra);
+                    no->direita = inserir(no->direita, palavra);
                 }
                 else { // Nó à direita NULO
                     //cout << palavra << " DIREITA NULO\n" << endl;
@@ -245,7 +245,7 @@ No* insere(No *no, string palavra){
 
             //exibir(no); // Verificando a quebra
             //No->baixo vai receber o novo filho
-            no->baixo = insere(novo, subPalavra(palavra,i,compPalavra-1));
+            no->baixo = inserir(novo, subPalavra(palavra,i,compPalavra-1));
             
         }
         return no;
@@ -256,7 +256,7 @@ No* insere(No *no, string palavra){
     else {
         if(i == compPalavraNo) { // Possui todas as letras iguais da chave mas é uma palavra maior
             if(no->baixo != nullptr) {// Possui filhos, comparar com os filhos
-                no->baixo = insere(no->baixo,subPalavra(palavra,i,compPalavra-1));
+                no->baixo = inserir(no->baixo,subPalavra(palavra,i,compPalavra-1));
             }
             else { // Não possui filhos, inserir no filho do nó
                 No *novo = (No*)calloc(1, sizeof(No));
@@ -283,14 +283,14 @@ No* insere(No *no, string palavra){
     return no;
 }
 
-No* remove(No *no, string palavra, No *anterior, No *ultimo_pai){
+No* remover(No *no, string palavra, No *anterior, No *ultimo_pai){
     if (palavra[0] == no->palavra[0]) // Possui a primeira letra igual
     {
         if (comprimento(palavra) > comprimento(no->palavra)) // Palavra maior do que a chave no nó
         {            
             if (no->baixo != nullptr) { // Caso tenha filhos, procurar o restante da palvra nos filhos
                 palavra = subPalavra(palavra, comprimento(no->palavra), comprimento(palavra)-1);
-                no = remove(no->baixo, palavra, nullptr, no); // nullptr ou nó?
+                no = remover(no->baixo, palavra, nullptr, no); // nullptr ou nó?
             }           
         }
         else if (palavra == no->palavra && no->palavraFinal) // Palavra igual a chave do nó e é uma palavra final
@@ -370,7 +370,7 @@ No* remove(No *no, string palavra, No *anterior, No *ultimo_pai){
     }
 
     else if (no->direita != NULL && palavra[0] > no->palavra[0]) // Não possui a primeira letra igual, e é maior, ir para o nó à direita
-        no->direita = remove(no->direita, palavra, no, ultimo_pai);
+        no->direita = remover(no->direita, palavra, no, ultimo_pai);
     return (ultimo_pai == nullptr ? no : ultimo_pai);
 }
 
