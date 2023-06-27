@@ -2,25 +2,38 @@
 
 using namespace std;
 
-int main(){
-    int n,d; cin >> n >> d;
-    while(n != 0 && d != 0){
-        string num; cin >> num;
+int main() {
+     int N,D;
+    string num;
+    vector<pair<int, int>> cresc;
 
-        vector<int> freq[10];
-        for(int i = 0; i < num.size(); i++)
-            freq[(int)(num[i] - '0')].push_back(i);
-        for(int i = 0; i < 10; i++)
-            for(int j = 0; j < freq[i].size() && d > 0; j++){
-                num[freq[i][j]] = (char)('9' + 1);
-                d--;
-            }
+    cin >> N >> D;
+
+    while(N&&D)
+    {
+        cresc.clear();
+        cin >> num;
         
-        for(int i = 0; i < num.size(); i++)
-            if(num[i] <= '9')
-                cout << num[i];
-        cout << "\n";
-        cin >> n >> d;
+        for(int c=0;c<N;c++) cresc.push_back(make_pair(num[c]-48, c));
+        sort(cresc.begin(),cresc.end());
+ 
+        for(int c=0;c<N;c++)
+        {
+            if(c<D) cresc.erase(cresc.begin());
+            else swap(cresc[c-D].first,cresc[c-D].second);
+        }
+        sort(cresc.begin(),cresc.end());
+        
+        for(int c=0;c<N-D;c++) cout << cresc[c].second;
+        cout << endl;
+
+        cin >> N >> D;
     }
     return 0;
 }
+
+
+
+
+
+
