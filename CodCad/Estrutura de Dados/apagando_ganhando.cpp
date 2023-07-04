@@ -3,37 +3,24 @@
 using namespace std;
 
 int main() {
-     int N,D;
-    string num;
-    vector<pair<int, int>> cresc;
+    int n,d; cin >> n >> d;
+    while(n && d){
+        string num; cin >> num;
 
-    cin >> N >> D;
-
-    while(N&&D)
-    {
-        cresc.clear();
-        cin >> num;
-        
-        for(int c=0;c<N;c++) cresc.push_back(make_pair(num[c]-48, c));
-        sort(cresc.begin(),cresc.end());
- 
-        for(int c=0;c<N;c++)
-        {
-            if(c<D) cresc.erase(cresc.begin());
-            else swap(cresc[c-D].first,cresc[c-D].second);
+        int pos = 0;
+        while(pos < num.size() - 1 && d > 0){
+            cout << "pos = " << pos << " : " << num[pos] << " " << num[pos+1] << endl;
+            if(num[pos] < num[pos+1]){
+                num.erase(num.begin() + pos);
+                d--;
+            } else
+                pos++;
+            cout << "num = " << num << endl;
         }
-        sort(cresc.begin(),cresc.end());
-        
-        for(int c=0;c<N-D;c++) cout << cresc[c].second;
-        cout << endl;
-
-        cin >> N >> D;
+        for(int i = 0; i < num.size()-d; i++)
+            cout << num[i];
+        cout << "\n";
+        cin >> n >> d;
     }
     return 0;
 }
-
-
-
-
-
-

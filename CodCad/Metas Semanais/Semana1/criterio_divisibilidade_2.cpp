@@ -4,9 +4,11 @@ using namespace std;
 
 int main(){
     string num; cin >> num;
-    int soma = 0, ult = 10*num[num.size()-1];
 
-    if((int)(num[]-'0')%2 == 0)
+    int soma = 0, ult = (int)(num[num.size()-1]-'0');
+    if(num.size() > 1)
+        ult += 10*(int)(num[num.size()-2]-'0');
+    if(ult%4 == 0)
         cout << "S\n";
     else
         cout << "N\n";
@@ -18,7 +20,7 @@ int main(){
     else
         cout << "N\n";
     
-    if(num[num.size()-1] == '0' || num[num.size()-1] == '5')
+    if(ult%25 == 0)
         cout << "S\n";
     else
         cout << "N\n";

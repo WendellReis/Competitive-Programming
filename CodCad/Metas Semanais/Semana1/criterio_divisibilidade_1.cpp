@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
-#include <string>
 
 using namespace std;
 
 int main(){
     string num; cin >> num;
     int soma = 0;
-    num.insert('0');
+
     if((int)(num[num.size()-1]-'0')%2 == 0)
         cout << "S\n";
     else
