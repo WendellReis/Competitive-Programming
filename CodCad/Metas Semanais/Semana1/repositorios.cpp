@@ -3,42 +3,33 @@
 using namespace std;
 
 int main(){ 
-    int c,n; cin >> c >> n;
+    int c,n,v; cin >> c >> n;
     
-    map<string, long long> update;
-    pair<string, long long> v;
-    vector<pair<string, long long>> apps;
+    map <string,int> inst,upd;
+    string nome;
     for(int i = 0; i < c; i++){
-        cin >> v.first >> v.second;
-        apps.push_back(v);
+        cin >> nome >> v;
+        if(inst.find(nome) != inst.end())
+            if(v > inst[nome]) 
+                inst[nome] = v;
+        else
+            inst[nome] = v;
     }
 
     for(int i = 0; i < n; i++){
-        cin >> v.first >> v.second;
-        update.insert(v);
+        cin >> nome >> v;
+        if(upd.find(nome) != upd.end())
+            if(v > upd[nome]) 
+                upd[nome] = v;
+        else
+            upd[nome] = v;
     }
 
-    sort(apps.begin(),apps.end());
-    pair<string, long long> ant;
-    ant.first = apps[0].first;
-    ant.second = apps[0].second;
-
-    for(int i = 1; i < apps.size(); i++){
-        if(apps[i].first == ant.first)
-            ant.second = max(apps[i].second,ant.second);
-        else{
-            if(update.find(ant.first) != update.end())
-                if(update[ant.first] > ant.second)
-                    cout << ant.first << " " << update[ant.first] << "\n";
-
-            ant.first = apps[i].first;
-            ant.second = apps[i].second;
-        }
+    for (map<string,int>::iterator it=upd.begin(); it!=upd.end(); ++it){
+      if(inst.find(it->first) != inst.end())
+        if(inst[it->first] > it->second)
+            cout << it->first << " " << it->second << "\n";
     }
-
-    if(update.find(ant.first) != update.end())
-        if(update[ant.first] > ant.second)
-            cout << ant.first << " " << update[ant.first] << "\n";
 
     return 0;
 }
