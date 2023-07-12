@@ -13,10 +13,12 @@ bool primo(long long n){
 }
 
 int main(){
-    long long n; cin >> n;
-	if(primo(n))
-		cout << "S\n";
-	else
-		cout << "N\n";
+    int n; cin >> n;
+    if(2 <= n)
+        cout << "2 ";
+    for(int i = 3; i <= n; i++)
+        if(primo(i))
+            cout << i << " ";
+    cout << "\n";
     return 0;
 }

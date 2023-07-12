@@ -4,7 +4,7 @@ using namespace std;
 
 bool primo(long long n){
 	if(n == 1)
-		return false;
+		return true;
 
 	for (int i = 2; i*i <= n; i++)
 		if (n%i == 0) 
@@ -15,8 +15,8 @@ bool primo(long long n){
 int main(){
     long long n; cin >> n;
 	if(primo(n))
-		cout << "S\n";
-	else
 		cout << "N\n";
+	else
+		cout << "S\n";
     return 0;
 }
