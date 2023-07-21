@@ -3,26 +3,18 @@
 using namespace std;
 
 int main(){
-    int n,m; cin >> n >> m;
-    vector<vector<int>> pontes;
-    for(int i = 0; i <= n; i++){
-        vector<int> t;
-        for(int j = 0; j <= n; j++)
-            t.push_back(0);
-        pontes.push_back(t);
-    }
+    int n,m,a,b,c; cin >> n >> m;
+    set<int> pontes[n+1];
 
-    int a,b,c;
     for(int i = 0; i < m; i++){
         cin >> a >> b >> c;
-        if(a == 1){
-            pontes[a][b] = 1;
-            pontes[b][a] = 1;
-        } else if(pontes[a][b] == 1)
+        if(a){
+            pontes[b].insert(c);
+            pontes[c].insert(b);
+        } else if(pontes[b].find(c) != pontes[b].end())
             cout << "1\n";
-        else 
+        else
             cout << "0\n";
     }
-
     return 0;
 }

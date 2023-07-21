@@ -1,48 +1,26 @@
 #include <bits/stdc++.h>
-#define REP(i,a,b) for(int i = a; i < b; i++)
 
 using namespace std;
 
 int main(){
-    int n,m; cin >> n >> m;
-    char mapa[n][m];
-
-    REP(i,0,n) REP(j,0,m) 
-        cin >> mapa[i][j];
+    int m,n; cin >> m >> n;
+    char mapa[m][n];
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            cin >> mapa[i][j];
 
     int quant = 0;
-    REP(i,0,n) REP(j,0,m)
-        if(mapa[i][j] == '#'){
-            if(i-1 >= 0)
-                if(mapa[i-1][j] == '.'){
-                    mapa[i][j] == '*';
-                    continue;
-                }    
-
-            if(i+1 < n)
-                if(mapa[i+1][j] == '.'){
-                    mapa[i][j] == '*';
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++){
+            if(mapa[i][j] == '#'){
+                if(i == 0 || j == 0 || i == n-1 || j == m-1){
+                    quant++;
                     continue;
                 }
-
-            if(j-1 >= 0)
-                if(mapa[i][j-1] == '.'){
-                    mapa[i][j] == '*';
-                    continue;
-                }    
-
-            if(j+1 < m)
-                if(mapa[i][j+1] == '.'){
-                    mapa[i][j] == '*';
-                    continue;
-                }
+                if(mapa[i+1][j] == '.' || mapa[i-1][j] == '.' || mapa[i][j+1] == '.' || mapa[i][j-1] == '.')
+                    quant++;
+            }
         }
-    
-    cout << endl;
-    REP(i,0,n){
-        REP(j,0,m) 
-            cout << mapa[i][j];
-        cout << endl;
-    } 
+    cout << quant << endl;
     return 0;
 }
