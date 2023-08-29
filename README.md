@@ -1,2 +1,2 @@
 # programming
-Códigos de programação competitiva
+Competitive programming codes
