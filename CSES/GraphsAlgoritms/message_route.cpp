@@ -14,23 +14,21 @@ int main(){
     }
 
     int dist[n+1] = {0}, visited[n+1] = {0};
-    
+    visited[1] = 1;
     queue<int> q;
     q.push(1);
-    while(!q.empty()){
-        int at = q.front(); q.pop();
-        visited[at] = 1;
-
-        if(at == n)
+    while (!q.empty()) {
+        int s = q.front(); q.pop();
+        if(s == n)
             break;
-
-        for(auto u : adj[at])
-            if(visited[u] == 0){
-                dist[u] = dist[at] + 1;
-                q.push(u);
-            }
-        
+        for (auto u : adj[s]) {
+            if (visited[u] == 1) continue;
+            visited[u] = 1;
+            dist[u] = dist[s]+1;
+            q.push(u);
+        }
     }
+
     if(dist[n] == 0){
         cout << "IMPOSSIBLE\n";
         return 0;
