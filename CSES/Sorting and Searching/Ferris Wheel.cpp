@@ -19,7 +19,7 @@ int main(){
         if(ini == fim){
             quant++;
             break;
-        } 
+        }
         if(p[fim] + p[ini] <= x)
             ini++;
         fim--;
