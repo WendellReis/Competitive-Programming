@@ -1,11 +1,10 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 vector<int> findCycle(int dest, int pai, vector<vector<int>>& adj, vector<int>& visitados, vector<int>& caminho) {
     visitados[dest] = 1;
     caminho.push_back(dest);
-
     for (int vizinho : adj[dest]) {
         if (visitados[vizinho] == 0) {
             vector<int> resultado = findCycle(vizinho, dest, adj, visitados, caminho);
@@ -17,6 +16,8 @@ vector<int> findCycle(int dest, int pai, vector<vector<int>>& adj, vector<int>& 
             int indice = 0;
             while (caminho[indice] != vizinho) {
                 indice++;
+                if(indice == caminho.size())
+                    break;
             }
             vector<int> ciclo;
             for (int i = indice; i < caminho.size(); i++) {
@@ -47,12 +48,12 @@ int main() {
     vector<int> caminho;
 
     for (int i = 1; i <= n; i++) {
-        if (visitados[i] == 0) {
+        if (visitados[i] == 0 && adj[i].size() > 0) {
             vector<int> cicloEncontrado = findCycle(i, -1, adj, visitados, caminho);
             if (!cicloEncontrado.empty()) {
                 cout << cicloEncontrado.size() << "\n";
-                for (int node : cicloEncontrado) 
-                    cout << node << " ";
+                for (int j = 0; j < (int)cicloEncontrado.size();j++)
+                    cout << cicloEncontrado[j] << " ";
                 cout << "\n";
                 return 0;
             }
