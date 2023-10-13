@@ -1,49 +1,50 @@
 /*
-    CSES Problem Set
-    https://cses.fi/problemset/task/2183
+    Problem Name: Missing Coin Sum
+    Problem Link: https://cses.fi/problemset/task/2183
+    Author: Wendell R. M. Matias (Foxtrotbr)
 */
 #include <bits/stdc++.h>
 
 using namespace std;
 
-int main(){
-    int n,v; cin >> n;
+#define ull unsigned long long
 
-    vector<int> coins;
+int main(){
+    ull n,v; cin >> n;
+
+    vector<ull> coins;
     for(int i = 0; i < n; i++){
         cin >> v;
         coins.push_back(v);
     }
 
     sort(coins.begin(),coins.end());
-    set<long long> sum;
-    vector<int> idx;
-    idx.push_back(0);
-    int j = 0;
-    for(long long i = 1; true; i++){
-        if(j == n){
-            cout << i << "\n";
-            return 0;
-        }
-        if(coins[j] == i){
-            sum.insert(i);
-            idx.push_back(j);
-            j++;
-        } else if(coins[j] > i){
-            cout << i << "\n";
-            return 0;
-        } else{
-            auto r = sum.find(i-coins[j]);
-            if(r == sum.end()){
-                cout << i << "\n";
-                return 0;
-            } else if(idx[*r] == j)
+    unordered_set<ull> sum;
+    vector<ull> pos; pos.push_back(0);
+    ull atual = 1, j = 0;
+    while(true){
+        if(j == n)
+            break;
+        if(coins[j] == atual){
+            sum.insert(atual);
+            pos.push_back(j);
+            atual++;
+        } else if(coins[j] > atual)
+            break;
+        else{
+            auto it = sum.find(atual-coins[j]);
+            if(it != sum.end()){
+                if(pos[(*it)] == j)
+                    j++;
+                else{
+                    sum.insert(atual);
+                    pos.push_back(j);
+                    atual++;
+                }
+            } else
                 j++;
-            else{
-                sum.insert(i);
-                idx[i] = j;
-            }
         }
     }
+    cout << atual << "\n";
     return 0;
 }
