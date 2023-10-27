@@ -22,7 +22,7 @@ int busca(vector<int> v, int k){
 
 int main(){
     int n,m; cin >> n >> m;
-
+                
     vector<int> v(n,INT32_MAX), p(n);
     for(int i = 0; i < n-1; i++)
         cin >> v[i];
