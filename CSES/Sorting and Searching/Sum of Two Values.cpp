@@ -1,6 +1,7 @@
 /*
-    CSES Problem Set
-    https://cses.fi/problemset/task/1640
+    Problem Name: Sum of Two Values
+    Problem Link: https://cses.fi/problemset/task/1640/
+    Author: Wendell R. M. Matias (Foxtrotbr)
 */
 #include <bits/stdc++.h>
 
