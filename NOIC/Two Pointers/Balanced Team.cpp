@@ -1,5 +1,5 @@
 /*
-    Problem Name: Sanduiche
+    Problem Name: Balanced Team
     Problem Link: https://codeforces.com/problemset/problem/1133/C
     Author: Wendell R. M. Matias (Foxtrotbr)
 */
