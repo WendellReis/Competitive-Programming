@@ -1,3 +1,8 @@
+/*
+    Problem Name: Sanduiche
+    Problem Link: https://codeforces.com/problemset/problem/1133/C
+    Author: Wendell R. M. Matias (Foxtrotbr)
+*/
 #include <bits/stdc++.h>
 
 using namespace std;
