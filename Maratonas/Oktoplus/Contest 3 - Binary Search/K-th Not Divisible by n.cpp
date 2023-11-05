@@ -7,13 +7,21 @@ Author: Wendell R. M. Matias (Foxtrotbr)
 
 using namespace std;
 
+#define ll long long
+
 int main(){
     int t; cin >> t;
+    ll n,k;
+    while(t > 0){
+        cin >> n >> k;
+        ll div = k/(n-1);
+        ll resto = k%(n-1);
 
-    while(t--){
-        int n,k; cin >> n >> k;
-        cout << n * (int)k/(n-1) - n + 1 + k%(n-1) << "\n";
+        if(resto == 0)
+            cout << n*div-1 << "\n";
+        else
+            cout << n*div+resto << "\n";
+        t--;
     }
-
     return 0;
 }
