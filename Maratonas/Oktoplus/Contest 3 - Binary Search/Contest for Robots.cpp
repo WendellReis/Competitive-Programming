@@ -5,29 +5,21 @@ using namespace std;
 int main(){
     int n; cin >> n;
 
-    vector<int> a(n),b(n);
+    vector<int> r(n),b(n);
     for(int i = 0; i < n; i++)
-        cin >> a[i];
+        cin >> r[i];
     for(int i = 0; i < n; i++)
         cin >> b[i];
     
-    int sa = 0, sb = 0;
+    int qr = 0, qb = 0;
     for(int i = 0; i < n; i++)
-        if(a[i] != b[i]){
-            if(a[i] == 1) sa++;
-            else sb++;
+        if(r[i] != b[i]){
+            if(r[i] == 1) qr++;
+            else qb++;
         }
-    if(sa == 0)
+    if(qr == 0)
         cout << "-1\n";
-    else if(sa > sb)
-        cout << "1\n";
-    else{
-        int tot = (int)(sb+1)/sa;
-        if((sb+1)%sa == 0)
-            cout << tot << "\n";
-        else
-            cout << tot+1 << "\n";
-    }
-        
+    else
+        cout << (int)qb/qr + 1 << "\n";
     return 0;
 }
