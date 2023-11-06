@@ -3,26 +3,25 @@
 using namespace std;
 
 int main(){
-    int t,n,k; cin >> t;
+    int t,n; cin >> t;
 
     while(t > 0){
-        cin >> n >> k;
+        cin >> n;
 
-        vector<int> prefix(n+1); prefix[0] = 0;
-        for(int i = 1; i <= n; i++){
-            cin >> prefix[i];
-            prefix[i]+=prefix[i-1];
-        }
-
-        if(k >= n)
-            cout << prefix[n] << "\n";
-        else{
-            int max_g = 0;
-            for(int i = k,j = 0; i <= n; i++, j++)
-                max_g = max(max_g,prefix[i]-prefix[j]);
-            cout << max_g << "\n";
-        }
+        vector<int> v(n);
+        for(int i = 0; i < n; i++)
+            cin >> v[i];
         
+        int maior = 1, menor = n, count = 1;
+        for(int i = 1; i < n; i++){
+            if(v[i]-v[i-1] > 2){
+                maior = max(maior,count);
+                menor = min(menor,count);
+                count = 1;
+            } else
+                count++;
+        }
+        cout << min(menor,count) << " " << max(maior,count)<< "\n";
         t--;
     }
     return 0;
