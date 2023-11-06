@@ -2,23 +2,23 @@
 
 using namespace std;
 
+#define ll long long
+
 int main(){
-    int t,n,k; cin >> t;
+    ll n,m,v; cin >> n >> m;
 
-    while(t > 0){
-        cin >> n >> k;
-        string s; cin >> s;
+    vector<ll> prefix(n+2); prefix[0] = 0, prefix[n+1] = LONG_LONG_MAX;
+    for(int i = 1; i <= n; i++){
+        cin >> prefix[i];
+        prefix[i]+=prefix[i-1];
+    }
 
-        int count = 0;
-        for(int i = 0; i < (int)s.size(); i++){
-            if(s[i] == 'B'){
-                count++;
-                i+=k-1;
-            }
-        }
-        cout << count << "\n";
-
-        t--;
+    int idx = 1;
+    for(int i = 0; i < m; i++){
+        cin >> v;
+        while(prefix[idx] < v)
+            idx++;
+        cout << idx << " " << v - prefix[idx-1] << "\n";
     }
     return 0;
 }
