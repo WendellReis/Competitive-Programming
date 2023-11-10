@@ -1,35 +1,38 @@
 /*
     Problem Name: Subarray Sums I
-    Problem Link: https://cses.fi/problemset/task/1660
+    Problem Link: https://cses.fi/problemset/task/1660/
     Author: Wendell R. M. Matias (Foxtrotbr)
 */
 #include <bits/stdc++.h>
 
 using namespace std;
 
+#define ll long long
+
 int main(){
-    int n,x, count = 0; cin >> n >> x;
-    
-    int v[n];
-    for(int i = 0; i < n; i++)
-        cin >> v[i];
+    int n; cin >> n;
 
-    long long sum = 0;
-    for(int i = 0, j = 0; i < n; i++){
-        if(sum < (long long)x)
-            sum+=v[i];
-        if(sum == (long long)x){
-            count++;
-            sum-=v[j];
-            j++;
-        } else{
-            sum-=v[j];
-            j++;
-        }
-        if(sum == (long long)x)
-            count++;
+    ll x; cin >> x;
+    vector<ll> prefix(n+1); prefix[0] = 0;
+    for(int i = 1; i <= n; i++){
+        cin >> prefix[i];
+        prefix[i]+=prefix[i-1];
     }
-
+        
+    int count = 0;
+    for(int i = 1, j = 1; i <= n;){
+        int p = prefix[i] - prefix[j-1];
+        if(p <= x){
+            if(p == x)
+                count++;
+            i++;
+        }
+        else {
+            j++;
+            if(j > i)
+                i++;
+        }
+    }
     cout << count << "\n";
     return 0;
 }
