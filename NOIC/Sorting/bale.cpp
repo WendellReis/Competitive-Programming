@@ -1,35 +1,64 @@
-//Problem Link: https://neps.academy/br/exercise/536
-
 #include <bits/stdc++.h>
 
 using namespace std;
 
-#define F first
-#define S second
+int _mergeSort(int arr[], int temp[], int left, int right);
+int merge(int arr[], int temp[], int left, int mid, int right);
 
-int main() {
-    int n; cin >> n;
+int mergeSort(int arr[], int array_size) {
+    int temp[array_size];
+    return _mergeSort(arr, temp, 0, array_size - 1);
+}
 
-    vector<pair<int,int>> v(n);
-    for(int i = 0; i < n; i++)
-        cin >> v[i].F, v[i].S = i;
-    
-    sort(v.begin(),v.end());
+int _mergeSort(int arr[], int temp[], int left, int right) {
+    int mid, inv_count = 0;
+    if (right > left) {
+        mid = (right + left) / 2;
+        inv_count += _mergeSort(arr, temp, left, mid);
+        inv_count += _mergeSort(arr, temp, mid + 1, right);
 
-    int count = 0;
-    set<int> s; s.insert(v[n-1].S);
-    for(int i = n-2; i >= 0; i--) {
-        auto it = s.upper_bound(v[i].S);
+        inv_count += merge(arr, temp, left, mid + 1, right);
+    }
+    return inv_count;
+}
 
-        while(it != s.end()) {
-            s.erase(it);
-            it = s.upper_bound(v[i].S);
+
+int merge(int arr[], int temp[], int left, int mid,int right) {
+    int i, j, k;
+    int inv_count = 0;
+
+    i = left;
+    j = mid;
+    k = left;
+    while ((i <= mid - 1) && (j <= right)) {
+        if (arr[i] <= arr[j]) {
+            temp[k++] = arr[i++];
         }
-
-        count+=s.size();
-        s.insert(v[i].S);
+        else {
+            temp[k++] = arr[j++];
+            inv_count = inv_count + (mid - i);
+        }
     }
 
-    cout << count << "\n";
+    while (i <= mid - 1)
+        temp[k++] = arr[i++];
+
+    while (j <= right)
+        temp[k++] = arr[j++];
+
+    for (i = left; i <= right; i++)
+        arr[i] = temp[i];
+    return inv_count;
+}
+
+int main() {
+    int tam; cin >> tam;
+    int arr[tam];
+    for(int i = 0; i < tam; i++)
+        cin >> arr[i];
+    
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int ans = mergeSort(arr, n);
+    cout << ans << '\n';
     return 0;
 }
