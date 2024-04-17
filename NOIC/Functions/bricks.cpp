@@ -5,9 +5,11 @@
 using namespace std;
 
 int solve(int n) {
-    if(n < 1)
+    if(n < 0)
         return 0;
-    else return solve(n) + solve(n-2);
+    if(n == 0)
+        return 1;
+    return solve(n-1) + solve(n-2);
 }
 
 int main() {
@@ -15,7 +17,6 @@ int main() {
     cin.tie(0);
     
     int n; cin >> n;
-
     while(n != 0) {
         cout << solve(n) << "\n";
         cin >> n;
