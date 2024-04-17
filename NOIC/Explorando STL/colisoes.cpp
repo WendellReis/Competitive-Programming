@@ -9,16 +9,15 @@ typedef struct retangulo{
     int y1;
 }retangulo;
 
-int main(){
+int main() {
     retangulo a,b;
 
     cin >> a.x0 >> a.y0 >> a.x1 >> a.y1;
     cin >> b.x0 >> b.y0 >> b.x1 >> b.y1;
 
-
-    if((a.x0 >= b.x0 && a.x1 <= b.x0 && a.y0 >= b.y0 && a.y1 <= b.y0) ||
-        (a.x0 >= b.x1 && a.x1 <= b.x1 && a.y0 >= b.y1 && a.y1 <= b.y1))
-            cout << 0 << endl;
-    else cout << 1 << endl;
+    if(b.x0 > a.x1 || a.x0 > b.x1 || b.y0 > a.y1 || a.y0 > b.y1)
+        cout << "0\n";
+    else
+        cout << "1\n";
     return 0;
 }
