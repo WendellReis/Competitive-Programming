@@ -4,32 +4,40 @@
 
 using namespace std;
 
-int find(int x, vector<int>& pai) {
-    if(pai[x] == x)
-        return x;
-    return pai[x] = find(pai[x],pai);
+int pai[1001], peso[1001] = {0};
+
+int find(int x) {
+    if(pai[x] == x) return x;
+    return pai[x] = find(pai[x]);
 }
 
-int join(int x, int y, vector<int>& pai) {
-    pai[find(x,pai)] = find(y,pai);
+void join(int x, int y, int& q) {
+    x = find(x);
+    y = find(y);
+
+    if(x == y) return;
+
+    if(peso[x] < peso[y]) pai[x] = y;
+    else if(peso[x] > peso[y]) pai[y] = x;
+    else {
+        pai[x] = y;
+        peso[y]++;
+    }
+
+    q++;
 }
 
 int main() {
-    int n,m; cin >> n >> m;
+    int n,m, q = 0; cin >> n >> m;
 
-    vector<int> pai(n+1);
     for(int i = 1; i <= n; i++)
         pai[i] = i;
-    
+
     for(int i = 0,x,y; i < m; i++) {
         cin >> x >> y;
-        join(x,y,pai);
+        join(x,y,q);
     }
 
-    set<int> s;
-    for(int i = 1; i <= n; i++)
-        s.insert(find(i,pai));
-    
-    cout << s.size() << "\n";
+    cout << n-q << '\n';
     return 0;
 }

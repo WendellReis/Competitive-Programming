@@ -1,51 +1,82 @@
+//Problem Link: https://judge.beecrowd.com/pt/problems/view/1303
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
-int main(){
-    int n, h = 1; cin >> n;
+struct equipe {
+    int num;
+    int pts = 0;
+    int pro = 0;
+    int contra = 0;
+    double average;
+};
 
-    while(n != 0){
-        int x,y,z,w;
-        vector<tuple<int,double,int>> t;
-        for(int i = 0; i <= n; i++)
-            t.push_back({0,0,i});
-        
-        int vit[n+1] = {0}, der[n+1] = {0};
-        for(int i = 0; i < n*(n-1)/2; i++){
-            cin >> x >> y >> z >> w;
+bool cmp(equipe a, equipe b) {
+    if(a.pts > b.pts)
+        return true;
+    if(a.pts < b.pts)
+        return false;
+    
+    if(a.average > b.average)
+        return true;
+    if(a.average < b.average)
+        return false;
+    
+    if(a.pro > b.pro)
+        return true;
+    if(a.pro < b.pro)
+        return false;
+    
+    return a.num < b.num;
+}
 
-            if(y > w){
-                get<0>(t[x])+=2;
-                get<0>(t[z])++;
-            } else{
-                get<0>(t[x])++;
-                get<0>(t[z])+=2;
+int main() {
+    int n, inst = 1; cin >> n;
+    
+    while(n != 0) {
+        //Numerando as equipes de 1 a N
+        equipe v[n];
+        for(int i = 0; i < n; i++)
+            v[i].num = i+1;
+
+        int x,px,z,pz;
+
+        for(int i = n*(n-1)/2; i > 0; i--) {
+            cin >> x >> px >> z >> pz;
+
+            if(px > pz) {
+                v[x-1].pts+=2;
+                v[z-1].pts+=1;
+                
+            } else {
+                v[x-1].pts+=1;
+                v[z-1].pts+=2;
             }
 
-            vit[x]+=y;
-            der[x]+=w;
-            
-            vit[z]+=w;
-            der[z]+=y;
+            v[x-1].pro+=px;
+            v[x-1].contra+=pz;
+            v[z-1].pro+=pz;
+            v[z-1].contra+=px;
         }
 
-        for(int i = 1; i<= n; i++){
-            if(der[i] == 0)
-                get<1>(t[i]) = vit[i];
+        //Calculando o cesta average
+        for(int i = 0; i < n; i++) {
+            if(v[i].contra == 0)
+                v[i].average = v[i].pro;
             else
-                get<1>(t[i]) = vit[i]/der[i];
+                v[i].average = v[i].pro/v[i].contra;
         }
 
-        sort(t.rbegin(),t.rend());
-
-        cout << "Instancia " << h << " \n";
+        sort(v,v+n,cmp);
+        cout << "Instancia " << inst << "\n";
         for(int i = 0; i < n; i++)
-            cout << get<2>(t[i]) << " ";
+            cout << v[i].num << " ";
+        cout << "\n\n";
 
-        cout << "\n";
-        h++;
         cin >> n;
+        inst++;
     }
+
     return 0;
 }
