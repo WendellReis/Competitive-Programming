@@ -15,7 +15,7 @@ int main(){
             else{
                 mx = max(ini,mx);
                 ini = 1;
-            }      
+            }
         }
         mx = max(ini,mx);
         cout << mx + 1 << "\n";

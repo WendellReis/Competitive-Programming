@@ -7,26 +7,32 @@
 using namespace std;
 
 int main(){
-    int n,m,k; cin >> n >> m >> k;
-    int size[n], apart[m];
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
     
+    int n,m,k; cin >> n >> m >> k;
+
+    vector<int> ap(n),apt(m);
     for(int i = 0; i < n; i++)
-        cin >> size[i];
-
+        cin >> ap[i];
     for(int i = 0; i < m; i++)
-        cin >> apart[i];
-    sort(size, size + n);
-    sort(apart, apart + m);
+        cin >> apt[i];
 
-    int count = 0;
-    for(int i = 0, pos = 0; i < n && pos < m; i++){
-        while(abs(size[i] - apart[pos]) > k && size[i] > apart[pos] && pos + 1 < m)
-            pos++;
-        if(abs(size[i] - apart[pos]) <= k){
+    sort(ap.begin(),ap.end());
+    sort(apt.begin(),apt.end());
+
+    int i = 0, j = 0, count = 0;
+    while(i < n && j < m) {
+        if(abs(ap[i] - apt[j]) <= k) {
+            i++;
+            j++;
             count++;
-            pos++;
-        }
+        } else if(ap[i] < apt[j])
+            i++;
+        else
+            j++;
     }
+
     cout << count << "\n";
     return 0;
 }
