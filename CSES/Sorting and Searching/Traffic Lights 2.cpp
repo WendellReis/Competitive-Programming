@@ -8,8 +8,10 @@ int main() {
 
     int x,n; cin >> x >> n;
 
-    set<int> s;
+    set<int> s,dist;
     s.insert(0),s.insert(x);
+    dist.insert(x);
+    int i = 0, f = 8;
 
     int k,res = 0;
     while(n--) {

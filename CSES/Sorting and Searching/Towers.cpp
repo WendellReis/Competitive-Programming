@@ -14,12 +14,32 @@ int main() {
     vector<pair<int,int>> v(n);
     for(int i = 0,k; i < n; i++)
         cin >> k, v[i] = {k,i};
-    
-    int tot = 1;
-    for(int i = 1; i < n; i++)
-        if(v[i].F > v[i-1].F && v[i].S < v[i-1].S)
-            tot++;
 
-    cout << tot << "\n";
+    if(v.size() == 1) {
+        cout << "1\n";
+        return 0;
+    }
+    
+    sort(v.begin(),v.end());
+
+    v.push_back({-1,-1});
+    bool s;
+    if(v[0].S < v[1].S) s = true;
+    else s = false;
+    
+    int count = 1;
+    for(int i = 2; i < n; i++) {
+        if(s && v[i-1].S > v[i].S) {
+            count++;
+            if(v[i].S < v[i+1].S) s = true;
+            else s = false;
+        } else if(!s && v[i-1].S < v[i].S) {\
+            count++;
+            if(v[i].S < v[i+1].S) s = true;
+            else s = false;
+        }
+    }
+
+    cout << count << "\n";
     return 0;
 }
