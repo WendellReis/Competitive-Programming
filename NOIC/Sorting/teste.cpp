@@ -1,59 +1,42 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-bool is_valid(const vector<int>& transformations) {
-    int n = transformations.size();
-    vector<int> count(n + 1, 0);
-
-    for (int i = 0; i < n; ++i) {
-        int fio = transformations[i];
-        if (fio < 1 || fio > n || count[fio] > 0) {
-            return false; // Fio inválido ou repetido
-        }
-        count[fio]++;
-    }
-
-    return true;
+bool cmp(pair<string,pair<double,int>> a, pair<string,pair<double,int>> b){
+    if(a.second.first>b.second.first) return 1;
+    else if(a.second.first==b.second.first&&a.first<b.first) return 1;
+    return 0;
 }
 
-void solve_p_network(int n, const vector<int>& transformations) {
-    if (!is_valid(transformations)) {
-        cout << "No solution" << endl;
-        return;
-    }
+int main(){
+    int n,k,m; cin >> n >> k;
 
-    // Construa a P-Network aqui
+    map<string,pair<double,int>> ma;
+    set<string> s;
+    string u;
 
-    // Determinando o número máximo de cursos
-    int m = 0;
-    for (int i = 0; i < n; ++i) {
-        m = max(m, abs(transformations[i] - i - 1));
-    }
-
-    // Saída da solução
-    cout << m << " ";
-    for (int i = 0; i < m; ++i) {
-        cout << i + 1 << " ";
-    }
-    cout << endl;
-}
-
-int main() {
-    int n;
-    while (true) {
-        cin >> n;
-        if (n == 0) {
-            break; // Fim da entrada
+    for (int i = 0; i < n; i++){
+        cin.ignore();
+        cin >> u >> m;
+        if(s.find(u)==s.end()){
+            s.insert(u);
+            ma[u]=make_pair(1.0,0);
         }
-
-        vector<int> transformations(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> transformations[i];
+        if(m>=ma[u].second){
+            ma[u].first+=0.25;
+            ma[u].second=m+k;
         }
+    }
+    
+    vector<pair<string,pair<double,int>>> v(ma.begin(),ma.end());
+    sort(v.begin(),v.end(),cmp);
 
-        solve_p_network(n, transformations);
+    cout << "--Rank do Nepscord--\n";
+
+    for (int i = 0; i < 3; i++){
+        cout << "#" << i+1 << ". ";
+        if(v.size()>i)
+            cout << v[i].first << " - Nivel " << int(v[i].second.first) << '\n';
     }
 
     return 0;
