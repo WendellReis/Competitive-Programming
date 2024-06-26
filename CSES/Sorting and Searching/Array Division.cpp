@@ -4,54 +4,42 @@ using namespace std;
 
 #define ll long long
 
-ll dif(vector<ll> v) {
-    ll d = 0;
-    for(int i = v.size()-1; i > 0; i--)
-        d = max(d,abs(v[i]-v[i-1]));
+bool verifySums(vector<int> v, int k, ll s) {
+    int q = 1;
+    ll sum = 0;
 
-    return d;
+    for(int i = 0; i < v.size(); i++) {
+        if(v[i] > s) return false;
+        sum+=v[i];
+        if(sum > s) {
+            q++;
+            sum = v[i];
+        }
+    }
+    
+    if(q <= k) return true;
+    return false;
 }
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+
     int n,k; cin >> n >> k;
-
-    vector<int> v(n), vk(k,0);
-    vector<ll> ack(k,0);
+    vector<int> v(n);
+    ll l = pow(10,9), h = 0;
     for(int i = 0; i < n; i++)
-        cin >> v[i];
+        cin >> v[i], l = min(l,(ll)v[i]), h+=v[i];
 
-    for(int i = 0; i < k; i++) {
-        vk[i] = i;
-        ack[i] = v[i];
-    }
-        
+    while(l < h) {
+        ll mid = (l+h)/2;
 
-    for(int i = k; i < n; i++) {
-        ll at = dif(ack);
-        int atualv = v[i];
-        for(int j = vk.size()-1; j >= 0; j--) {
-            vk[j]++;
-            ack[j] += atualv;
-            ll at2 = dif(ack);
-            if(at2 <= at) {
-                break;
-            }else {
-                if(j == 0) {
-                    ack[j]-= v[vk[j]];
-                    vk[j]--;
-                } else {
-                    atualv = v[vk[j-1]+1];
-                    ack[j] -= v[vk[j]-1];
-
-                }
-            }
-        }
+        if(verifySums(v,k,mid))
+            h = mid;
+        else
+            l = mid+1;
     }
 
-    ll d = 0;
-    for(int i = 0; i < k; i++)
-        d = max(d,ack[i]);
-    
-    cout << d << "\n";
+    cout << h << "\n";
     return 0;
 }
