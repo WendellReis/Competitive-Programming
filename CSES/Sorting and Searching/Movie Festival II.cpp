@@ -19,7 +19,7 @@ void watch(set<pair<int,int>> &s) {
         } else
             aux = {it->f,it->i};
     }
-}5
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
